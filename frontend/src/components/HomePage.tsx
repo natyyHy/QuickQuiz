@@ -1,43 +1,22 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import { Header } from './Header';
-import { UserTypeCard } from './UserTypeCard';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { UserTypeCard } from "./UserTypeCard";
+import { Layout } from "./layout";
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  const handleContactClick = () => {
-    // Could open a contact modal, navigate to contact page, etc.
-    toast.info('Funcionalidade de contato será implementada em breve!');
-  };
 
   const handleStudentClick = () => {
-    navigate('/aluno/entrar');
+    navigate("/aluno/entrar");
   };
 
   const handleTeacherClick = () => {
-    navigate('/professor/login');
+    navigate("/professor/login");
   };
 
   return (
-    <div className="w-full min-h-screen relative bg-[#605BEF]">
-      {/* Background Image */}
-      <div className="fixed inset-0 w-full h-full z-0">
-        <img
-          src="/bg.svg"
-          alt="Background pattern"
-          className="w-full h-full object-cover opacity-100"
-          onError={(e) => console.error('Erro ao carregar imagem:', e)}
-          onLoad={() => console.log('Imagem carregada com sucesso')}
-        />
-      </div>
-      
-      {/* Header */}
-      <Header />
-      
-      {/* Main Content */}
-      <main className="relative z-[1] flex flex-col items-center px-4 pb-12">
-        {/* Logo */}
+    <Layout>
+      <main className="flex flex-col items-center px-4 pb-12">
         <section className="flex justify-center mt-[80px] max-md:mt-[60px] max-sm:mt-[80px]">
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/02860aef18c993020c6cd55bcab4a7836ad4b4a5?width=604"
@@ -46,13 +25,16 @@ export const HomePage: React.FC = () => {
           />
         </section>
 
-        {/* User Type Selection */}
         <section className="flex w-full max-w-[653px] flex-col items-center gap-[50px] mt-[40px] max-md:gap-10 max-md:mt-[30px] max-sm:gap-[30px] max-sm:mt-[20px]">
           <h2 className="text-white text-center text-5xl font-semibold max-md:text-4xl max-sm:text-[28px]">
             Quem é você?
           </h2>
-          
-          <div className="flex justify-between items-center w-full max-md:flex-col max-md:gap-[30px] max-sm:gap-[25px]" role="group" aria-label="Selecione seu tipo de usuário">
+
+          <div
+            className="flex justify-between items-center w-full max-md:flex-col max-md:gap-[30px] max-sm:gap-[25px]"
+            role="group"
+            aria-label="Selecione seu tipo de usuário"
+          >
             <UserTypeCard
               type="student"
               title="Aluno"
@@ -60,7 +42,7 @@ export const HomePage: React.FC = () => {
               iconAlt="Ícone representando um aluno"
               onClick={handleStudentClick}
             />
-            
+
             <UserTypeCard
               type="teacher"
               title="Professor"
@@ -71,6 +53,6 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
       </main>
-    </div>
+    </Layout>
   );
 };
